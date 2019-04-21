@@ -103,7 +103,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        /*try {
+        try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
@@ -114,7 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         } catch (Resources.NotFoundException e) {
             Log.e("Log", "Can't find style. Error: ", e);
-        }*/
+        }
         LatLng me = new LatLng(50.4185, 30.5510);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4185, 30.5510), 15));
 
