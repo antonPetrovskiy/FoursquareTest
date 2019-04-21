@@ -1,12 +1,11 @@
 package work.test.com.testwork;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import work.test.com.testwork.adapter.ViewPageAdapter;
-import work.test.com.testwork.entity.Venue;
 import work.test.com.testwork.entity.Venues;
 
 
@@ -49,15 +48,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        MapsInitializer.initialize(getApplicationContext());
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
+
+
+        mapFragment.getMapAsync(this);
         init();
 
     }
 
     public void init(){
+
+
+
         infoCards = findViewById(R.id.pagerView);
         infoCards.setVisibility(View.GONE);
         markerList = new ArrayList<>();
@@ -103,18 +108,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
-
-            if (!success) {
-                Log.e("Log", "Style parsing failed.");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e("Log", "Can't find style. Error: ", e);
-        }
+//        try {
+//            // Customise the styling of the base map using a JSON object defined
+//            // in a raw resource file.
+//            boolean success = googleMap.setMapStyle(
+//                    MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
+//
+//            if (!success) {
+//                Log.e("Log", "Style parsing failed.");
+//            }
+//        } catch (Resources.NotFoundException e) {
+//            Log.e("Log", "Can't find style. Error: ", e);
+//        }
         LatLng me = new LatLng(50.4185, 30.5510);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.4185, 30.5510), 15));
 
@@ -146,4 +151,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+
+
+
 }
